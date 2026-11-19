@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Todos os bonés | CAPE SNC®</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="img/logo.svg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="catalog">
+
+  <div class="top-banner">
+    PORTES GRÁTIS EM COMPRAS ACIMA DE R$ 299 • 5% OFF NO PIX • PRIMEIRA TROCA GRATUITA
+  </div>
+
+  <header class="navbar">
+    <div class="container nav-content">
+      <a href="index.html" class="brand-logo"><img src="img/logo.svg" alt="CapTei Headwear" class="logo-img" /></a>
+
+      <nav class="nav-links">
+        <a href="index.html">Início</a>
+        <a href="catalogo.html" class="active">Todos os bonés</a>
+        <a href="catalogo.html?cat=Aba%20curva">Aba curva</a>
+        <a href="catalogo.html?cat=Aba%20reta">Aba reta</a>
+        <a href="catalogo.html?cat=Esportivo">Esportivos</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="search-box-inline">
+          <input type="text" id="searchInput" placeholder="Buscar modelo ou cor..." oninput="applyFilters()" />
+        </div>
+        <a href="login.html" class="icon-btn" title="Entrar ou Criar conta">👤</a>
+        <button class="icon-btn cart-btn" onclick="toggleCart()" title="Sacola">
+          🛍️ <span class="cart-badge" id="cartBadge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="catalog-header">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Início</a> / Todos os bonés</div>
+      <div class="catalog-title-row">
+        <div>
+          <span class="eyebrow">UM ESTILO PARA CADA TRAJETO</span>
+          <h1>Todos os bonés</h1>
+        </div>
+        <p class="catalog-subtitle">Bonés de aba curva, aba reta e esportivos com o monograma C CAPE SNC.</p>
+      </div>
+
+      <div class="filter-pills" id="categoryPills">
+        <button class="pill active" data-cat="Todos" onclick="setCategory('Todos')">Todos os modelos</button>
+        <button class="pill" data-cat="Aba curva" onclick="setCategory('Aba curva')">Aba curva</button>
+        <button class="pill" data-cat="Aba reta" onclick="setCategory('Aba reta')">Aba reta</button>
+        <button class="pill" data-cat="Esportivo" onclick="setCategory('Esportivo')">Esportivos</button>
+        <button class="pill" data-cat="Dad hat" onclick="setCategory('Dad hat')">Dad hat</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding pt-0">
+    <div class="container catalog-layout">
+      <aside class="filters-sidebar">
+        <div class="filter-group">
+          <div class="filter-group-header">
+            <h4>Filtros</h4>
+            <button onclick="resetFilters()" class="link-reset">Limpar</button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h5>Modelo</h5>
+          <label class="checkbox-item"><input type="checkbox" value="Aba curva" class="model-filter" onchange="applyFilters()"> Aba curva</label>
+          <label class="checkbox-item"><input type="checkbox" value="Aba reta" class="model-filter" onchange="applyFilters()"> Aba reta</label>
+          <label class="checkbox-item"><input type="checkbox" value="Esportivo" class="model-filter" onchange="applyFilters()"> Esportivos</label>
+          <label class="checkbox-item"><input type="checkbox" value="Dad hat" class="model-filter" onchange="applyFilters()"> Dad hat</label>
+        </div>
+
+        <div class="filter-group">
+          <h5>Cor</h5>
+          <div class="color-swatches">
+            <button class="swatch" style="background:#56161E" title="Vinho" onclick="toggleColorFilter('Vinho', this)"></button>
+            <button class="swatch" style="background:#4E5835" title="Verde Oliva" onclick="toggleColorFilter('Verde Oliva', this)"></button>
+            <button class="swatch" style="background:#151515" title="Preto" onclick="toggleColorFilter('Preto', this)"></button>
+            <button class="swatch" style="background:#F2F2F0" title="Branco" onclick="toggleColorFilter('Branco', this)"></button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h5>Preço Máximo: <span id="priceValue">R$ 250</span></h5>
+          <input type="range" id="priceRange" min="100" max="250" value="250" oninput="updatePriceLabel(this.value)" />
+        </div>
+      </aside>
+
+      <div class="catalog-main">
+        <div class="catalog-toolbar">
+          <span id="productCount">A mostrar modelos</span>
+          <select id="sortSelect" onchange="applyFilters()">
+            <option value="featured">Ordenar: Mais vendidos</option>
+            <option value="price-asc">Menor preço</option>
+            <option value="price-desc">Maior preço</option>
+          </select>
+        </div>
+        <div class="products-grid three-cols" id="catalogGrid"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-bottom">
+      <a href="index.html" class="brand-logo white"><img src="img/logo.svg" alt="CapTei Headwear" class="logo-img" /></a>
+      <span>© 2026 CAPE SNC. Todos os direitos reservados.</span>
+    </div>
+  </footer>
+
+  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h3>A Tua Sacola</h3>
+      <button onclick="toggleCart()" class="close-btn">✕</button>
+    </div>
+    <div class="cart-shipping-bar" id="shippingBar">Faltam <strong>R$ 299,00</strong> para Portes Grátis</div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Subtotal</span>
+        <strong id="cartSubtotal">R$ 0,00</strong>
+      </div>
+      <button class="btn-terracotta w-100" onclick="checkout()">Finalizar Compra →</button>
+    </div>
+  </aside>
+
+  <script src="script.js"></script>
+</body>
+</html>

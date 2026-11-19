@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CAPE SNC® | A rua faz sua cabeça.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="img/logo.svg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="home">
+
+  <div class="top-banner">
+    PORTES GRÁTIS EM COMPRAS ACIMA DE R$ 299 • 5% OFF NO PIX • PRIMEIRA TROCA GRATUITA
+  </div>
+
+  <header class="navbar">
+    <div class="container nav-content">
+      <a href="index.html" class="brand-logo"><img src="img/logo.svg" alt="CapTei Headwear" class="logo-img" /></a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="active">Início</a>
+        <a href="catalogo.html">Todos os bonés</a>
+        <a href="catalogo.html?cat=Aba%20curva">Aba curva</a>
+        <a href="catalogo.html?cat=Aba%20reta">Aba reta</a>
+        <a href="catalogo.html?cat=Esportivo">Esportivos</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="catalogo.html" class="search-trigger">
+          <span>🔍 Buscar boné...</span>
+        </a>
+        <a href="login.html" class="icon-btn" title="Entrar ou Criar conta">👤</a>
+        <button class="icon-btn cart-btn" onclick="toggleCart()" title="Sacola">
+          🛍️ <span class="cart-badge" id="cartBadge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero-section">
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <span class="eyebrow">• CAPE SNC ORIGINALS | VOL. 01</span>
+        <h1>A RUA FAZ<br>SUA<br>CABEÇA.</h1>
+        <p>O teu estilo não segue um caminho só. Encontra o boné que acompanha o teu ritmo.</p>
+        <div class="hero-btns">
+          <a href="catalogo.html" class="btn-terracotta">Encontre seu boné ↗</a>
+        </div>
+        <div class="hero-scroll">DESCE PARA VER O DROP ↓</div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-card-editorial">
+          <img id="heroModelImg" src="img/modelo.jpg" alt="Modelo CAPE SNC com boné branco e C preto" />
+          <div class="hero-card-overlay">
+            <span class="tag-drop">DROP EXCLUSIVO</span>
+            <h3>Signature Monogram C</h3>
+            <p>Sarja pesada com monograma C cursivo aplicado na copa e aba.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="benefits-bar">
+    <div class="container benefits-grid">
+      <div class="benefit-item">
+        <strong>PORTES GRÁTIS</strong>
+        <span>Compras acima de R$ 299</span>
+      </div>
+      <div class="benefit-item">
+        <strong>PRIMEIRA TROCA GRÁTIS</strong>
+        <span>Até 30 dias após entrega</span>
+      </div>
+      <div class="benefit-item">
+        <strong>5% DE DESCONTO</strong>
+        <span>Pagamento à vista no Pix</span>
+      </div>
+      <div class="benefit-item">
+        <strong>COMPRA SEGURA</strong>
+        <span>Envio rápido e garantido</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding">
+    <div class="container">
+      <div class="section-header">
+        <h2>Um boné. Vários caminhos.</h2>
+        <a href="catalogo.html" class="link-arrow">Ver todos os modelos →</a>
+      </div>
+
+      <div class="categories-grid">
+        <a href="catalogo.html?cat=Aba%20curva" class="category-card">
+          <div class="cat-img-box"><img id="catCurvaImg" src="img/bone-vinho.jpg" alt="Aba curva" /></div>
+          <div class="cat-info"><span>Aba curva</span><span>→</span></div>
+        </a>
+        <a href="catalogo.html?cat=Aba%20reta" class="category-card">
+          <div class="cat-img-box"><img id="catRetaImg" src="img/bone-preto.jpg" alt="Aba reta" /></div>
+          <div class="cat-info"><span>Aba reta</span><span>→</span></div>
+        </a>
+        <a href="catalogo.html?cat=Esportivo" class="category-card">
+          <div class="cat-img-box"><img id="catEsportivoImg" src="img/modelo.jpg" alt="Esportivos" /></div>
+          <div class="cat-info"><span>Esportivos</span><span>→</span></div>
+        </a>
+        <a href="catalogo.html?cat=Dad%20hat" class="category-card">
+          <div class="cat-img-box"><img id="catDadImg" src="img/bone-oliva.jpg" alt="Dad hat" /></div>
+          <div class="cat-info"><span>Dad hat</span><span>→</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding pt-0">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <span class="eyebrow">ESCOLHAS QUE FALAM POR TI</span>
+          <h2>Os favoritos da rua.</h2>
+        </div>
+        <a href="catalogo.html" class="link-arrow">Explorar toda a coleção →</a>
+      </div>
+      <div class="products-grid" id="featuredProducts"></div>
+    </div>
+  </section>
+
+  <section class="section-padding">
+    <div class="container">
+      <div class="manifesto-box">
+        <div class="manifesto-img">
+          <img src="img/bone-oliva.jpg" alt="" srcset="">
+        </div>
+        <div class="manifesto-content">
+          <span class="eyebrow-light">NÃO É SÓ SOBRE ESTILO</span>
+          <h2>É sobre o que<br>tu carregas.</h2>
+          <p>A CAPE SNC nasceu do encontro entre a rua e a identidade de cada pessoa. Bonés de aba curva, aba reta e esportivos com o monograma C.</p>
+          <a href="login.html" class="btn-white">Criar conta / Entrar →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="newsletter-section">
+    <div class="container newsletter-flex">
+      <div>
+        <h3>Fica por dentro. Sai do óbvio.</h3>
+        <p>Novos drops, acesso antecipado e 10% OFF na primeira compra.</p>
+      </div>
+      <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+        <input type="email" placeholder="O teu melhor e-mail" required />
+        <button type="submit" class="btn-dark">Quero fazer parte →</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="brand-logo white"><img src="img/logo.svg" alt="CapTei Headwear" class="logo-img" /></div>
+        <p class="footer-desc">Da rua para a tua cabeça. Feito para quem tem caminho próprio.</p>
+      </div>
+      <div>
+        <h4>EXPLORE</h4>
+        <ul>
+          <li><a href="catalogo.html">Todos os bonés</a></li>
+          <li><a href="catalogo.html?cat=Aba%20curva">Aba curva</a></li>
+          <li><a href="catalogo.html?cat=Aba%20reta">Aba reta</a></li>
+          <li><a href="catalogo.html?cat=Esportivo">Esportivos</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>CONTA</h4>
+        <ul>
+          <li><a href="login.html">Entrar</a></li>
+          <li><a href="login.html?tab=register">Criar conta</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>COMPRA TRANQUILA</h4>
+        <ul>
+          <li>Até 3x sem juros</li>
+          <li>5% de desconto no Pix</li>
+          <li>Primeira troca gratuita</li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2026 CAPE SNC. Todos os direitos reservados.</span>
+      <span>Privacidade • Termos de uso</span>
+    </div>
+  </footer>
+
+  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h3>A Tua Sacola</h3>
+      <button onclick="toggleCart()" class="close-btn">✕</button>
+    </div>
+    <div class="cart-shipping-bar" id="shippingBar">Faltam <strong>R$ 299,00</strong> para Portes Grátis</div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Subtotal</span>
+        <strong id="cartSubtotal">R$ 0,00</strong>
+      </div>
+      <button class="btn-terracotta w-100" onclick="checkout()">Finalizar Compra →</button>
+    </div>
+  </aside>
+
+  <script src="script.js"></script>
+</body>
+</html>

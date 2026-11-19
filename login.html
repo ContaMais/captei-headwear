@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entrar ou Criar Conta | CAPE SNC®</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="img/logo.svg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="login" class="auth-page-body">
+
+  <div class="auth-split-container">
+    <div class="auth-visual-side">
+      <img src="img/modelo.jpg" alt="" srcset="">
+
+      <div class="auth-visual-top">
+        <a href="index.html" class="brand-logo white"><img src="img/logo.svg" alt="CapTei Headwear" class="logo-img" /></a>
+        <span class="badge-street">COLEÇÃO 2026</span>
+      </div>
+
+      <div class="auth-visual-bottom">
+        <span class="eyebrow-light">BEM-VINDO À CAPE SNC</span>
+        <h1>SEU ESTILO.<br>SEU LUGAR.</h1>
+        <p>Guarda os teus bonés favoritos, acompanha as tuas encomendas e entra primeiro nos próximos drops.</p>
+      </div>
+    </div>
+
+    <div class="auth-form-side">
+      <div class="auth-top-nav">
+        <a href="./index.html" class="back-link">← Voltar para a loja</a>
+      </div>
+
+      <div class="auth-box">
+        <div class="auth-tabs">
+          <button class="auth-tab active" id="tabLogin" onclick="switchAuthTab('login')">Entrar</button>
+          <button class="auth-tab" id="tabRegister" onclick="switchAuthTab('register')">Criar conta</button>
+        </div>
+
+        <form id="loginForm" class="auth-form" onsubmit="handleAuthSubmit(event, 'login')">
+          <h2>Bom ver-te por aqui.</h2>
+          <p class="auth-sub">Entra na tua conta CAPE SNC e continua de onde paraste.</p>
+
+          <div class="form-group">
+            <label>E-mail</label>
+            <input type="email" placeholder="o.teu.email@exemplo.com" required />
+          </div>
+
+          <div class="form-group">
+            <label>Palavra-passe</label>
+            <input type="password" placeholder="A tua palavra-passe" required />
+          </div>
+
+          <div class="form-options">
+            <label class="checkbox-item"><input type="checkbox" /> Lembrar-me</label>
+            <a href="#" class="forgot-link">Esqueci a palavra-passe</a>
+          </div>
+
+          <button type="submit" class="btn-terracotta w-100">Entrar na minha conta →</button>
+
+          <div class="divider"><span>ou continua com</span></div>
+
+          <button type="button" class="btn-google w-100" onclick="alert('Login com Google simulado!')">
+            <strong>G</strong> Entrar com Google
+          </button>
+        </form>
+
+        <form id="registerForm" class="auth-form hidden" onsubmit="handleAuthSubmit(event, 'register')">
+          <h2>Faz parte da CAPE SNC.</h2>
+          <p class="auth-sub">Cria a tua conta e recebe 10% OFF na primeira compra.</p>
+
+          <div class="form-group">
+            <label>Nome completo</label>
+            <input type="text" id="regName" placeholder="Ex: Caio Silva" required />
+          </div>
+
+          <div class="form-group">
+            <label>E-mail</label>
+            <input type="email" id="regEmail" placeholder="o.teu.email@exemplo.com" required />
+          </div>
+
+          <div class="form-group">
+            <label>Criar palavra-passe</label>
+            <input type="password" placeholder="Mínimo 6 caracteres" required />
+          </div>
+
+          <label class="checkbox-item mb-16">
+            <input type="checkbox" required /> Aceito os Termos de Uso e Política de Privacidade
+          </label>
+
+          <button type="submit" class="btn-terracotta w-100">Criar conta CAPE SNC →</button>
+        </form>
+
+        <div id="authFeedback" class="auth-feedback hidden"></div>
+      </div>
+
+      <div class="auth-footer">
+        <span>© CAPE SNC</span>
+        <span>Privacidade • Termos de uso</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
