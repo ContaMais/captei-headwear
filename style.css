@@ -263,3 +263,9 @@ a { text-decoration: none; color: inherit; }
   .brand-logo .logo-img { height: 48px; }
 }
 .brand-logo.white .logo-img { filter: invert(1); }
+
+/* Firebase: mensagens de erro e conta logada no menu */
+.auth-feedback.erro { background: #FCE8E6; color: #C5221F; }
+.conta-nome { font-size: 13px; font-weight: 600; margin-left: 4px; text-transform: capitalize; }
+.conta-sair { background: none; border: 1px solid var(--border); border-radius: 99px; padding: 4px 10px; font-size: 12px; cursor: pointer; color: var(--text-muted); }
+.conta-sair:hover { color: var(--accent); border-color: var(--accent); }
