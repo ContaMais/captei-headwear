@@ -44,7 +44,7 @@ a { text-decoration: none; color: inherit; }
   z-index: 50;
 }
 
-.nav-content { height: 72px; display: flex; align-items: center; justify-content: space-between; }
+.nav-content { height: 96px; display: flex; align-items: center; justify-content: space-between; }
 
 .brand-logo {
   font-family: var(--font-display);
@@ -257,5 +257,9 @@ a { text-decoration: none; color: inherit; }
   .nav-links { display: none; }
 }
 /* Logo CapTei Headwear */
-.brand-logo .logo-img { height: 40px; width: auto; display: block; }
+.brand-logo .logo-img { height: 64px; width: auto; display: block; }
+@media (max-width: 600px) {
+  .nav-content { height: 80px; }
+  .brand-logo .logo-img { height: 48px; }
+}
 .brand-logo.white .logo-img { filter: invert(1); }
