@@ -81,8 +81,18 @@ if (!configurado) {
   const db = getFirestore(app);
   auth.languageCode = "pt";
 
-  // Grava/atualiza o cliente no Firestore
-  async function salvarCliente(user, { novo = false, nome, provedor }) {
+  // Grava/atualiza o cliente no Firestore.
+  // Nunca trava o login: se o Firestore demorar mais de 5s ou falhar, segue e registra no console.
+  async function salvarCliente(user, opcoes) {
+    const limite = new Promise((_, rej) => setTimeout(() => rej(new Error("Firestore não respondeu em 5s")), 5000));
+    try {
+      await Promise.race([gravarCliente(user, opcoes), limite]);
+    } catch (err) {
+      console.error("[CapTei] Não foi possível salvar o cliente no Firestore:", err?.code || err?.message, err);
+    }
+  }
+
+  async function gravarCliente(user, { novo = false, nome, provedor }) {
     const dados = {
       nome: nome || user.displayName || "",
       email: user.email,
