@@ -269,3 +269,14 @@ a { text-decoration: none; color: inherit; }
 .conta-nome { font-size: 13px; font-weight: 600; margin-left: 4px; text-transform: capitalize; }
 .conta-sair { background: none; border: 1px solid var(--border); border-radius: 99px; padding: 4px 10px; font-size: 12px; cursor: pointer; color: var(--text-muted); }
 .conta-sair:hover { color: var(--accent); border-color: var(--accent); }
+
+/* Login: mostrar senha, sucesso e erro mais evidentes */
+.senha-wrap { position: relative; }
+.senha-wrap input { padding-right: 84px; }
+.senha-toggle { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 12px; font-weight: 600; color: var(--accent); cursor: pointer; padding: 6px 8px; }
+.senha-toggle:hover { text-decoration: underline; }
+.form-group input.campo-erro { border-color: #C5221F; background: #FFF6F5; }
+.auth-feedback.erro { border-left: 4px solid #C5221F; }
+.btn-sucesso, .btn-sucesso:hover, .btn-sucesso:disabled { background: #188038 !important; border-color: #188038 !important; color: #fff !important; cursor: default; opacity: 1; }
+.link-sucesso { color: #188038 !important; font-weight: 600; }
+button:disabled { opacity: 0.75; cursor: wait; }

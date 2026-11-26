@@ -246,7 +246,25 @@ function checkout() {
   toggleCart();
 }
 
+// Mostrar/ocultar senha
+function toggleSenha(btn) {
+  const input = btn.parentElement.querySelector("input");
+  const mostrar = input.type === "password";
+  input.type = mostrar ? "text" : "password";
+  btn.textContent = mostrar ? "Ocultar" : "Mostrar";
+  btn.setAttribute("aria-label", mostrar ? "Ocultar senha" : "Mostrar senha");
+  input.focus();
+}
+
+// Limpa avisos e erros ao trocar de aba
+function limparAvisosAuth() {
+  const fb = document.getElementById("authFeedback");
+  if (fb) { fb.textContent = ""; fb.classList.add("hidden"); fb.classList.remove("erro"); }
+  document.querySelectorAll(".campo-erro").forEach((el) => el.classList.remove("campo-erro"));
+}
+
 function switchAuthTab(tab) {
+  limparAvisosAuth();
   const loginForm = document.getElementById("loginForm");
   const regForm = document.getElementById("registerForm");
   const tLogin = document.getElementById("tabLogin");
@@ -263,17 +281,6 @@ function switchAuthTab(tab) {
     tLogin.classList.remove("active");
     tReg.classList.add("active");
   }
-}
-
-function handleAuthSubmit(e, type) {
-  e.preventDefault();
-  const fb = document.getElementById("authFeedback");
-  fb.classList.remove("hidden");
-  const nome = document.getElementById("regName")?.value || "cliente";
-  fb.textContent = type === "register"
-    ? `Conta criada com sucesso, ${nome}! A redirecionar...`
-    : "Sessão iniciada com sucesso! A redirecionar...";
-  setTimeout(() => { window.location.href = "./index.html"; }, 1200);
 }
 
 function handleNewsletter(e) {

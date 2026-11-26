@@ -39,9 +39,38 @@ function feedback(msg, tipo = "ok") {
 
 function carregando(form, ativo) {
   const btn = form?.querySelector('button[type="submit"]');
-  if (!btn) return;
+  if (!btn || btn.classList.contains("btn-sucesso")) return;
   if (ativo) { btn.dataset.texto = btn.textContent; btn.textContent = "Aguarde..."; btn.disabled = true; }
   else { btn.textContent = btn.dataset.texto || btn.textContent; btn.disabled = false; }
+}
+
+// Sucesso: o botão fica verde com ✓ e depois vai para a loja
+function sucesso(form, texto, destino = "./index.html") {
+  const fb = document.getElementById("authFeedback");
+  fb?.classList.add("hidden");
+  const btn = form.querySelector('button[type="submit"]');
+  btn.classList.add("btn-sucesso");
+  btn.disabled = true;
+  btn.textContent = `✓ ${texto}`;
+  setTimeout(() => { window.location.href = destino; }, 1800);
+}
+
+// Erro: mensagem vermelha e campos marcados
+const CAMPOS_ERRO = {
+  "auth/email-already-in-use": ["email"],
+  "auth/invalid-email": ["email"],
+  "auth/user-not-found": ["email"],
+  "auth/weak-password": ["senha"],
+  "auth/invalid-credential": ["email", "senha"],
+  "auth/wrong-password": ["senha"]
+};
+function erro(form, err) {
+  form.querySelectorAll(".campo-erro").forEach((el) => el.classList.remove("campo-erro"));
+  (CAMPOS_ERRO[err?.code] || []).forEach((tipo) => {
+    form.querySelector(tipo === "email" ? 'input[type="email"]' : ".senha-wrap input")?.classList.add("campo-erro");
+  });
+  feedback(traduzErro(err), "erro");
+  console.error("[CapTei]", err?.code, err);
 }
 
 if (!configurado) {
@@ -80,24 +109,35 @@ if (!configurado) {
         await setPersistence(auth, lembrar ? browserLocalPersistence : browserSessionPersistence);
         const { user } = await signInWithEmailAndPassword(auth, email, senha);
         await salvarCliente(user, { provedor: "email" });
-        feedback(`Bem-vindo de volta, ${user.displayName || "cliente"}! Redirecionando...`);
-        setTimeout(() => { window.location.href = "./index.html"; }, 1000);
+        sucesso(loginForm, `Login feito! Olá, ${(user.displayName || "cliente").split(" ")[0]}`);
       } catch (err) {
-        feedback(traduzErro(err), "erro");
+        erro(loginForm, err);
       } finally {
         carregando(loginForm, false);
       }
     });
 
-    document.getElementById("forgotLink")?.addEventListener("click", async (e) => {
+    const forgot = document.getElementById("forgotLink");
+    forgot?.addEventListener("click", async (e) => {
       e.preventDefault();
-      const email = document.getElementById("loginEmail").value.trim();
-      if (!email) { feedback("Digite seu e-mail no campo acima e clique de novo.", "erro"); return; }
+      const campo = document.getElementById("loginEmail");
+      const email = campo.value.trim();
+      if (!email) {
+        campo.classList.add("campo-erro");
+        campo.focus();
+        feedback("Digite seu e-mail no campo acima e clique de novo em \"Esqueci a senha\".", "erro");
+        return;
+      }
+      forgot.textContent = "Enviando...";
       try {
         await sendPasswordResetEmail(auth, email);
-        feedback("Enviamos um link para redefinir a senha. Confira seu e-mail (e o spam).");
+        document.getElementById("authFeedback")?.classList.add("hidden");
+        campo.classList.remove("campo-erro");
+        forgot.textContent = "✓ Link enviado! Veja seu e-mail";
+        forgot.classList.add("link-sucesso");
       } catch (err) {
-        feedback(traduzErro(err), "erro");
+        forgot.textContent = "Esqueci a palavra-passe";
+        erro(loginForm, err);
       }
     });
 
@@ -108,10 +148,12 @@ if (!configurado) {
         const cred = await signInWithPopup(auth, new GoogleAuthProvider());
         const novo = getAdditionalUserInfo(cred)?.isNewUser;
         await salvarCliente(cred.user, { novo, provedor: "google" });
-        feedback(`Olá, ${cred.user.displayName || "cliente"}! Redirecionando...`);
-        setTimeout(() => { window.location.href = "./index.html"; }, 1000);
+        googleBtn.classList.add("btn-sucesso");
+        googleBtn.disabled = true;
+        googleBtn.textContent = `✓ Login feito! Olá, ${(cred.user.displayName || "cliente").split(" ")[0]}`;
+        setTimeout(() => { window.location.href = "./index.html"; }, 1800);
       } catch (err) {
-        feedback(traduzErro(err), "erro");
+        if (err?.code !== "auth/popup-closed-by-user" && err?.code !== "auth/cancelled-popup-request") erro(loginForm, err);
       }
     });
   }
@@ -128,15 +170,17 @@ if (!configurado) {
         const { user } = await createUserWithEmailAndPassword(auth, email, senha);
         await updateProfile(user, { displayName: nome });
         await salvarCliente(user, { novo: true, nome, provedor: "email" });
-        feedback(`Conta criada, ${nome}! Redirecionando...`);
-        setTimeout(() => { window.location.href = "./index.html"; }, 1200);
+        sucesso(registerForm, `Conta criada! Bem-vindo, ${nome.split(" ")[0]}`);
       } catch (err) {
-        feedback(traduzErro(err), "erro");
+        erro(registerForm, err);
       } finally {
         carregando(registerForm, false);
       }
     });
   }
+
+  document.querySelectorAll(".auth-form input").forEach((el) =>
+    el.addEventListener("input", () => el.classList.remove("campo-erro")));
 
   // ---------- Menu: mostra quem está logado ----------
   onAuthStateChanged(auth, (user) => {

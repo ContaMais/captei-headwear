@@ -36,11 +36,11 @@
 
       <div class="auth-box">
         <div class="auth-tabs">
-          <button class="auth-tab active" id="tabLogin" onclick="switchAuthTab('login')">Entrar</button>
-          <button class="auth-tab" id="tabRegister" onclick="switchAuthTab('register')">Criar conta</button>
+          <button type="button" class="auth-tab active" id="tabLogin" onclick="switchAuthTab('login')">Entrar</button>
+          <button type="button" class="auth-tab" id="tabRegister" onclick="switchAuthTab('register')">Criar conta</button>
         </div>
 
-        <form id="loginForm" class="auth-form" onsubmit="handleAuthSubmit(event, 'login')">
+        <form id="loginForm" class="auth-form">
           <h2>Bom ver-te por aqui.</h2>
           <p class="auth-sub">Entra na tua conta CAPE SNC e continua de onde paraste.</p>
 
@@ -51,7 +51,10 @@
 
           <div class="form-group">
             <label>Palavra-passe</label>
-            <input type="password" id="loginSenha" placeholder="A tua palavra-passe" required />
+            <div class="senha-wrap">
+              <input type="password" id="loginSenha" placeholder="A tua palavra-passe" autocomplete="current-password" required />
+              <button type="button" class="senha-toggle" aria-label="Mostrar senha" onclick="toggleSenha(this)">Mostrar</button>
+            </div>
           </div>
 
           <div class="form-options">
@@ -63,12 +66,12 @@
 
           <div class="divider"><span>ou continua com</span></div>
 
-          <button type="button" id="googleBtn" class="btn-google w-100" onclick="alert('Login com Google simulado!')">
+          <button type="button" id="googleBtn" class="btn-google w-100">
             <strong>G</strong> Entrar com Google
           </button>
         </form>
 
-        <form id="registerForm" class="auth-form hidden" onsubmit="handleAuthSubmit(event, 'register')">
+        <form id="registerForm" class="auth-form hidden">
           <h2>Faz parte da CAPE SNC.</h2>
           <p class="auth-sub">Cria a tua conta e recebe 10% OFF na primeira compra.</p>
 
@@ -84,7 +87,10 @@
 
           <div class="form-group">
             <label>Criar palavra-passe</label>
-            <input type="password" id="regSenha" placeholder="Mínimo 6 caracteres" minlength="6" required />
+            <div class="senha-wrap">
+              <input type="password" id="regSenha" placeholder="Mínimo 6 caracteres" minlength="6" autocomplete="new-password" required />
+              <button type="button" class="senha-toggle" aria-label="Mostrar senha" onclick="toggleSenha(this)">Mostrar</button>
+            </div>
           </div>
 
           <label class="checkbox-item mb-16">
