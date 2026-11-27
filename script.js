@@ -62,7 +62,7 @@ function attachImageFallback(imgEl, fallbackSrc) {
 }
 
 const PRODUCTS = [
-  { id: 1, name: "Signature Monogram C — Bordô", category: "Aba curva", color: "Vinho", price: 159.90, badge: "MAIS VENDIDO", localSrc: "img/bone-vinho.jpg", fallback: IMG_VINHO, featured: true },
+  { id: 1, name: "Signature Monogram C — Bordô", category: "Aba curva", color: "Vinho", price: 159.90, badge: "MAIS VENDIDO", localSrc: "img/bone-bordo-modelo.jpg", fallback: IMG_VINHO, featured: true },
   { id: 2, name: "Signature Monogram C — Oliva Militar", category: "Aba curva", color: "Verde Oliva", price: 159.90, badge: "NOVO DROP", localSrc: "img/bone-oliva.jpg", fallback: IMG_OLIVA, featured: true },
   { id: 3, name: "Signature Monogram C — White Edition", category: "Aba curva", color: "Branco", price: 159.90, badge: "EXCLUSIVO", localSrc: "img/modelo.jpg", fallback: IMG_BRANCO, featured: true },
   { id: 4, name: "Flat Brim Street C — Black Edition", category: "Aba reta", color: "Preto", price: 169.90, badge: "ABA RETA", localSrc: "img/bone-preto.jpg", fallback: IMG_PRETO, featured: true },
