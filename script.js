@@ -237,15 +237,6 @@ function updateCartUI() {
   }
 }
 
-function checkout() {
-  if (!cart.length) return alert("Adiciona um boné à sacola primeiro!");
-  alert("Encomenda CAPE SNC concluída com sucesso!");
-  cart = [];
-  localStorage.setItem("capesnc_cart", JSON.stringify(cart));
-  updateCartUI();
-  toggleCart();
-}
-
 // Mostrar/ocultar senha
 function toggleSenha(btn) {
   const input = btn.parentElement.querySelector("input");

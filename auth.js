@@ -13,6 +13,9 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
 
+// Se veio do carrinho (?voltar=finalizar), volta para o pedido depois do login
+const VOLTAR = new URLSearchParams(location.search).get("voltar") === "finalizar" ? "./index.html#finalizar" : "./index.html";
+
 const configurado = firebaseConfig.apiKey && firebaseConfig.apiKey !== "COLE_AQUI";
 
 const ERROS = {
@@ -45,7 +48,7 @@ function carregando(form, ativo) {
 }
 
 // Sucesso: o botão fica verde com ✓ e depois vai para a loja
-function sucesso(form, texto, destino = "./index.html") {
+function sucesso(form, texto, destino = VOLTAR) {
   const fb = document.getElementById("authFeedback");
   fb?.classList.add("hidden");
   const btn = form.querySelector('button[type="submit"]');
@@ -161,7 +164,7 @@ if (!configurado) {
         googleBtn.classList.add("btn-sucesso");
         googleBtn.disabled = true;
         googleBtn.textContent = `✓ Login feito! Olá, ${(cred.user.displayName || "cliente").split(" ")[0]}`;
-        setTimeout(() => { window.location.href = "./index.html"; }, 1800);
+        setTimeout(() => { window.location.href = VOLTAR; }, 1800);
       } catch (err) {
         if (err?.code !== "auth/popup-closed-by-user" && err?.code !== "auth/cancelled-popup-request") erro(loginForm, err);
       }

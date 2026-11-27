@@ -1,11 +1,30 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+
     // Cada cliente só lê e grava o próprio cadastro.
-    // Você vê todos pelo Console do Firebase (o Console ignora estas regras).
     match /clientes/{uid} {
       allow read, write: if request.auth != null && request.auth.uid == uid;
     }
+
+    // Pedidos: o cliente logado só CRIA o próprio pedido e só LÊ os dele.
+    // Ninguém altera nem apaga pelo site. O dono vê todos no Console do Firebase
+    // (o Console não usa estas regras).
+    match /pedidos/{pedidoId} {
+      allow create: if request.auth != null
+        && request.resource.data.keys().hasOnly(['uid','numero','cliente','itens','subtotal','frete','total','endereco','pagamento','status','criadoEm'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.status == 'novo'
+        && request.resource.data.criadoEm == request.time
+        && request.resource.data.total is number
+        && request.resource.data.total > 0
+        && request.resource.data.itens is list
+        && request.resource.data.itens.size() > 0
+        && request.resource.data.itens.size() <= 50;
+      allow read: if request.auth != null && resource.data.uid == request.auth.uid;
+      allow update, delete: if false;
+    }
+
     // Todo o resto fica fechado.
     match /{document=**} {
       allow read, write: if false;
